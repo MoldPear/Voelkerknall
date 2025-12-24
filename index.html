@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Konzertticket</title>
+
+<style>
+body{
+  margin:0;
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  background:#0b0b12;
+  font-family:system-ui, sans-serif;
+  color:#fff;
+}
+
+.ticket{
+  width:min(380px, 92vw);
+  background:linear-gradient(135deg,#1a1a2e,#0f3460);
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+  text-align:center;
+}
+
+.title{
+  font-size:1.4rem;
+  font-weight:800;
+  margin-bottom:6px;
+}
+
+.subtitle{
+  opacity:.85;
+  margin-bottom:18px;
+}
+
+.open{
+  margin-top:20px;
+  padding:14px 18px;
+  border-radius:12px;
+  border:none;
+  background:#e94560;
+  color:white;
+  font-weight:700;
+  font-size:1rem;
+  cursor:pointer;
+}
+
+.qr{
+  display:none;
+  margin-top:18px;
+}
+
+.small{
+  margin-top:12px;
+  font-size:.85rem;
+  opacity:.75;
+}
+
+img{
+  width:220px;
+  height:220px;
+  background:white;
+  padding:10px;
+  border-radius:12px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="ticket">
+  <div class="title">🔥Konzert von <b>Völkerknall</b>🔥</div>
+  <div class="subtitle">Live Session – Eintritt 18.700.000,00€<br>
+  25.12.2025</div>
+
+  <button class="open" onclick="openTicket()">Ticket öffnen</button>
+
+  <div id="qr" class="qr">
+    <p>🎟 Eintrittskarte</p>
+    <img id="qrImg" alt="QR Code zum Scannen">
+    <div class="small">Am Eingang scannen</div>
+  </div>
+</div>
+
+<script>
+function openTicket(){
+  document.querySelector(".open").style.display="none";
+  document.getElementById("qr").style.display="block";
+
+  // Baut automatisch den korrekten scan.html-Link
+  const scanUrl = new URL("scan.html", window.location.href).toString();
+
+  // QR-Code als Bild (simpel & zuverlässig)
+  const qrImgUrl =
+    "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data="
+    + encodeURIComponent(scanUrl);
+
+  document.getElementById("qrImg").src = qrImgUrl;
+}
+</script>
+
+</script>
+
+</body>
+</html>
